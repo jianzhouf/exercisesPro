@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "jquery": "~1.11.3",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "echarts": "^3.1.7"
   }
 }
