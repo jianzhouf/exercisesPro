@@ -1,0 +1,22 @@
+{
+  "name": "exercisesPro",
+  "description": "exercises project for new students",
+  "main": "",
+  "authors": [
+    "xuweijian <dlmu_xwj2012@163.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.3",
+    "bootstrap": "^3.3.6"
+  }
+}
