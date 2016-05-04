@@ -27,13 +27,7 @@
                                 <i class="nav-icon fa fa-bullhorn"></i>
                                 <span class="small-screen-text">通知</span>
                             </a>
-                            <script>
-                            init.push(function() {
-                                $('#main-navbar-notifications').slimScroll({
-                                    height: 250
-                                });
-                            });
-                            </script>
+                            
                             <!-- / Javascript -->
                             <div style="width: 300px" class="dropdown-menu widget-notifications no-padding">
                                 <div id="main-navbar-notifications" class="notifications-list">
@@ -54,15 +48,7 @@
                                 <i class="nav-icon fa fa-envelope"></i>
                                 <span class="small-screen-text">消息</span>
                             </a>
-                            <!-- Javascript -->
-                            <script>
-                            init.push(function() {
-                                $('#main-navbar-messages').slimScroll({
-                                    height: 250
-                                });
-                            });
-                            </script>
-                            <!-- / Javascript -->
+                            
                             <div style="width: 300px;" class="dropdown-menu widget-messages-alt no-padding">
                                 <div id="main-navbar-messages" class="messages-list">
                                     暂无消息！
@@ -77,7 +63,7 @@
                         </li>
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle user-menu" href="#">
-                                <img alt="" src="assets/demo/avatars/1.jpg">
+                                <img alt="" src="../images/base/touxiang.jpg">
                                 <span><%= user.username %></span>
                             </a>
                             <ul class="dropdown-menu">
