@@ -2,5 +2,34 @@
 <% include ../layout/menus.html %>
 
 <h1>Welcome <%= user.username %>, 欢迎来到数据中心！</h1>
+<div class="container">
+    <div class="table-btns">
+        <form action="">
+            <select id="select-z" class="search-z" style="width: 200px;">
+            </select>
+            <button type="button" id="query-z" class="btn btn-default">查询</button>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-sm-1"></th>
+                <th class="col-sm-3">类别</th>
+                <th class="col-sm-3">收入</th>
+                <th class="col-sm-3">支出</th>
+                <th class="col-sm-2">日期</th>
+            </tr>
+        </thead>
+        <tbody id="table-content">
+        </tbody>
+    </table>
+    <div class="pagination">
+        <a href="#" class="first" data-action="first">&laquo;</a>
+        <a href="#" class="previous" data-action="previous">&lsaquo;</a>
+        <input type="text" readonly="readonly" />
+        <a href="#" class="next" data-action="next">&rsaquo;</a>
+        <a href="#" class="last" data-action="last">&raquo;</a>
+    </div>
+</div>
 
 <% include ../layout/footer.html %>
