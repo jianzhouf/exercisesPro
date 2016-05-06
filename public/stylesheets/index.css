@@ -1,4 +1,7 @@
 /* database.html */
+body{
+  font: 14px "微软雅黑", Helvetica, Arial, sans-serif;;
+}
 .table {
   background: #FFF;
   font-size: 12px;
@@ -30,10 +33,21 @@
   transition: none;
   font-size: 12px;
 }
-.btn {
+.table-btns .btn {
   font-size: 12px;
   border-radius: 0px;
   padding: 8px 16px;
   height: 32px;
   line-height: 14px;
+}
+
+
+/*基本信息 表单*/
+#info input{
+  width: 40%;
+}
+#info textarea{
+  width: 40%;
+  height: 100px;
+  resize: none;
 }

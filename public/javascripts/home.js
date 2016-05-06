@@ -155,6 +155,29 @@ $(function(){
             });
         });
     }
+    else if(title == "账户"){
+        function profileInit(){
+            $.ajax({
+                dataType: "json",
+                url: "../javascripts/profile.json",
+                data: params,
+                success: function(data){
+                    $("#userName").val(data.data.userName);
+                    $("#address").val(data.data.address).removeAttr("readonly");
+                    $("#phone").val(data.data.phone).removeAttr("readonly");
+                }
+            });
+        }
+        profileInit();
+        $("#profile-save").click(function(){
+            $("#profile-form :input").attr("readonly","readonly");
+        });
+        $("#profile-submit").click(function(){
+            var param = $("#profile-form").serialize();
+            console.log(param);
+            profileInit();
+        });
+    }
 });
 
 
