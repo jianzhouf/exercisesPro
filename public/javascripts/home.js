@@ -1,9 +1,9 @@
 $(function(){
     var title = document.title;
     if(title == '数据中心'){
-        $.getScript("../javascripts/jquery.jqpagination.min.js",function(){
-
-        });
+        var params = {
+            currentPage:1
+        };
         function tableResponse(params,url){
             $.ajax({
                 dataType: "json",
@@ -15,6 +15,7 @@ $(function(){
             });
         }
         function tableInit(data,params,maxPage,url){
+
             var page = params.currentPage;
             if(data.length == 0){
                 $("#table-content").html('<tr><td></td><td></td><td>找不到数据</td><td></td><td></td></tr>')
@@ -43,13 +44,18 @@ $(function(){
 
                 }
                 //生成类别选择框
-                for(var i = 0,select = [];i < data.length; i++){
-                    select[data[i].category] = 1;
+                if(!params.category){
+                    for(var i = 0,select = [];i < data.length; i++){
+                        select[data[i].category] = 1;
+                    }
+                    $("#select-z").empty();
+                    $("#select-z").append("<option value=''>全部</option>");
+                    for(var key in select){
+                        $("#select-z").append("<option value='"+key+"'>"+key+"</option>")
+                    }
                 }
-                $("#select-z").empty();
-                for(var key in select){
-                    $("#select-z").append("<option>"+key+"</option>")
-                }
+
+
 
                 //分页组件
                 $('.pagination').jqPagination({
@@ -61,17 +67,93 @@ $(function(){
                 });
             }
         }
-        tableResponse({currentPage:1},"../javascripts/aTest.json");
+        tableResponse(params,"../javascripts/aTest.json");
 
         $("#query-z").click(function(){
-            var params = {
-                currentPage:1
-            };
-            params.category = $("#select-z").val();
+
+            if($("#select-z").val() !== ""){
+                params.category = $("#select-z").val();
+            }else{
+                delete params.category;
+            }
+
             tableResponse(params,"../javascripts/aTest.json");
         });
+    }
+    else if(title == "报表"){
+        var myChart = echarts.init(document.getElementById('main'));
 
-
+        $.get('../javascripts/report.json').done(function (data) {
+            myChart.setOption({
+                color:['#29C127','#FE9A38'],
+                title: {
+                    text: '年收入支出报表'
+                },
+                tooltip: {},
+                legend: {
+                    data:['收入','支出','超支']
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                xAxis: {
+                    data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                },
+                yAxis: {},
+                series: [{
+                    name: '收入',
+                    type: 'bar',
+                    data: data.data["income"],
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    }
+                },{
+                    name: '支出',
+                    type: 'bar',
+                    data: data.data["spending"],
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ],
+                        itemStyle:{
+                            normal:{
+                                color: "#FE9A38"
+                            }
+                        }
+                    },
+                    itemStyle:{
+                        normal:{
+                            color:function(item){
+                                if(item.data > data.data["limitVal"]){
+                                    return "#C23531";
+                                }
+                                return "#FE9A38";
+                            }
+                        }
+                    }
+                //},{
+                //    name:"超支",
+                //    type: 'bar',
+                //    itemStyle: {
+                //        normal: {
+                //            color: function (item) {
+                //                 return "#C23531";
+                //            }
+                //        }
+                //    }
+                }]
+            });
+        });
     }
 });
 
