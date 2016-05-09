@@ -1,7 +1,7 @@
 <% include ../layout/header.html %>
 <% include ../layout/menus.html %>
 
-<h1>Welcome <%= user.username %>, 欢迎进入个人账户目录！！</h1>
+<!--<h1>Welcome <%= user.username %>, 欢迎进入个人账户目录！！</h1>-->
 <div class="container">
     <div>
 
@@ -38,7 +38,20 @@
                 </div>
 
             </div>
-            <div role="tabpanel" class="tab-pane" id="notice">...</div>
+            <div role="tabpanel" class="tab-pane" id="notice" style="margin-top: 10px;">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">系统公告</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium adipisci alias atque debitis deleniti expedita, minus perferendis quod repellat rerum sint ut voluptatem. Atque dolorem ducimus incidunt itaque porro.<strong>461</strong>.</div>
+                        <div class="notification-ago">12h ago</div>
+                        <button type="button" class="btn btn-danger notice-delete">
+                            删除
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div role="tabpanel" class="tab-pane" id="messages">...</div>
         </div>
 

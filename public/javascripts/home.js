@@ -34,7 +34,7 @@ $(function(){
                             + data[i].date
                             + '</td></tr>');
                     }else{
-                        $("#table-content").append('<tr><td>' + (i+1) + '</td><td>'
+                        $("#table-content").append('<tr><td >' + (i+1) + '</td><td>'
                             + data[i].category + '</td><td>'
                             + data[i].income + '</td><td>'
                             + data[i].spending + '</td><td>'
@@ -177,6 +177,36 @@ $(function(){
             console.log(param);
             profileInit();
         });
+
+        //通知栏删除按钮
+        $("#notice").on("click",".notice-delete",function(){
+            $(this).parents(".panel").remove();
+        });
+        $("#notice").append('<div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">系统公告</h3></div><div class="panel-body"><div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line<strong>461</strong>.</div><div class="notification-ago">12h ago</div> <button type="button" class="btn btn-danger notice-delete">删除 </button></div>');
+    }
+    else if(title == "首页"){
+        var myChart = echarts.init(document.getElementById('report-intro'));
+
+
+            myChart.setOption({
+                title: {
+                    text: '报表柱状图'
+                },
+                tooltip: {},
+                legend: {
+                    data:['**']
+                },
+                xAxis: {
+                    data: []
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20]
+                }]
+            });
+
     }
 });
 

@@ -13,10 +13,12 @@ body{
 }
 .table thead tr th {
   border-bottom: none;
+  text-align: center;
 }
 .table tbody {
   border: 1px solid #e1e6eb;
   border-top: none;
+  text-align: center;
 }
 .table-btns {
   border-top: 2px solid #e1e6eb;
@@ -40,14 +42,21 @@ body{
   height: 32px;
   line-height: 14px;
 }
+.pagination {
+  position: relative;
+  top: -40px;
+}
 
 
 /*基本信息 表单*/
-#info input{
+#info input {
   width: 40%;
 }
-#info textarea{
+#info textarea {
   width: 40%;
   height: 100px;
   resize: none;
+}
+.notice-delete {
+  float: right;
 }
