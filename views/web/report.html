@@ -1,11 +1,9 @@
 <% include ../layout/header.html %>
 <% include ../layout/menus.html %>
 
-<!--<h1>Welcome <%= user.username %>, 欢迎查看报表！</h1>-->
 <div class="container">
-    <!--<div class="col-sm-4"></div>-->
-    <div id="main" style="width: 1200px;height:600px;"></div>
-    <!--<div class="col-sm-2"></div>-->
+    <div id="main" style="width: 1100px;height:600px;"></div>
+    <div id="pieChart" style="width: 1100px;height:600px;" ></div>
 </div>
 <script>
     var myChart = echarts.init(document.getElementById('main'));
@@ -82,5 +80,53 @@
         });
     });
 
+    var pieChart = echarts.init(document.getElementById('pieChart'));
+    $.get('../javascripts/reportSpending.json').done(function (data) {
+        var dataClass = [];
+        for(var i = 0; i < data.data.length; i++){
+            dataClass.push(data.data[i]['name']);
+        }
+        pieChart.setOption({
+            title: {
+                text: '年支出报表'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                data:dataClass
+            },
+            series: [
+                {
+                    name:'消费类别',
+                    type:'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:data.data
+                }
+            ]
+        });
+    });
 </script>
 <% include ../layout/footer.html %>
