@@ -6,55 +6,64 @@
     <div>
 
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">基本信息</a></li>
-            <li role="presentation"><a href="#notice" aria-controls="notice" role="tab" data-toggle="tab">通知</a></li>
-            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">消息</a></li>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="/profile">基本信息</a></li>
+            <li><a href="/profile/notice">通知</a></li>
+            <li><a href="/profile/message">消息</a></li>
         </ul>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active row" id="info" style="padding-top: 10px;">
-                <div class="col-sm-2 text-center">
-                    <img src="../images/base/touxiang.jpg" alt="">
-                </div>
-                <div class="col-sm-10" style="border-left: 2px solid #dcd9de;padding-left: 60px;">
-                    <form id="profile-form">
-                        <div class="form-group">
-                            <label for="userName"><span class="text-danger">*&nbsp;&nbsp;</span>用户名</label>
-                            <input type="text" class="form-control" id="userName" name="userName" placeholder="用户名" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="address"><span class="text-danger">*&nbsp;&nbsp;</span>联系地址</label>
-                            <textarea  class="form-control" id="address" name="address" placeholder="联系地址"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone"><span class="text-danger">*&nbsp;&nbsp;</span>联系手机</label>
-                            <input type="text" class="form-control" id="phone" name="phone"  placeholder="联系手机">
-                        </div>
-                        <button type="button"class="btn btn-default" style="margin-right: 10px;" id="profile-save">保存</button>
-                        <button type="button" class="btn btn-primary" id="profile-submit">提交</button>
-                    </form>
-                </div>
 
+        <div class="col-sm-2">
+            <div style="width: 80px;height: 80px;border-radius: 100%;">
+                <img src="../images/base/noavatar_middle.gif" style="border-radius: 100%;" alt="">
             </div>
-            <div role="tabpanel" class="tab-pane" id="notice" style="margin-top: 10px;">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">系统公告</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium adipisci alias atque debitis deleniti expedita, minus perferendis quod repellat rerum sint ut voluptatem. Atque dolorem ducimus incidunt itaque porro.<strong>461</strong>.</div>
-                        <div class="notification-ago">12h ago</div>
-                        <button type="button" class="btn btn-danger notice-delete">
-                            删除
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="messages">...</div>
+
         </div>
+        <div class="col-sm-10" style="border-left: 2px solid #dcd9de;padding-left: 60px;">
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="userName"><span class="text-danger">*&nbsp;&nbsp;</span>用户名</label>
+                    <input type="text" class="form-control" id="userName" name="userName" placeholder="用户名" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="address"><span class="text-danger">*&nbsp;&nbsp;</span>联系地址</label>
+                    <textarea class="form-control" id="address" name="address" placeholder="联系地址"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="phone"><span class="text-danger">*&nbsp;&nbsp;</span>联系手机</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="联系手机">
+                </div>
+                <button type="button" class="btn btn-default" style="margin-right: 10px;" id="profile-save">保存</button>
+                <button type="button" class="btn btn-primary" id="profile-submit">提交</button>
+            </form>
+        </div>
+
 
     </div>
 </div>
+<script>
+    var params = {};
+    function profileInit() {
+        $.ajax({
+            dataType: "json",
+            url: "../javascripts/profile.json",
+            data: params,
+            success: function (data) {
+                $("#userName").val(data.data.userName);
+                $("#address").val(data.data.address).removeAttr("readonly");
+                $("#phone").val(data.data.phone).removeAttr("readonly");
+            }
+        });
+    }
+
+    profileInit();
+    $("#profile-save").click(function () {
+        $("#profile-form :input").attr("readonly", "readonly");
+    });
+    $("#profile-submit").click(function () {
+        params = $("#profile-form").serialize();
+        profileInit();
+    });
+
+</script>
 <% include ../layout/footer.html %>

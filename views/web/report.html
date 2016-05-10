@@ -7,4 +7,80 @@
     <div id="main" style="width: 1200px;height:600px;"></div>
     <!--<div class="col-sm-2"></div>-->
 </div>
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+
+    $.get('../javascripts/report.json').done(function (data) {
+        myChart.setOption({
+            color: ['#29C127', '#FE9A38'],
+            title: {
+                text: '年收入支出报表'
+            },
+            tooltip: {},
+            legend: {
+                data: ['收入', '支出', '超支']
+            },
+            toolbox: {
+                show: false,
+                feature: {
+                    dataView: {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            xAxis: {
+                data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+            },
+            yAxis: {},
+            series: [{
+                name: '收入',
+                type: 'bar',
+                data: data.data["income"],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                }
+            }, {
+                name: '支出',
+                type: 'bar',
+                data: data.data["spending"],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ],
+                    itemStyle: {
+                        normal: {
+                            color: "#FE9A38"
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: function (item) {
+                            if (item.data > data.data["limitVal"]) {
+                                return "#C23531";
+                            }
+                            return "#FE9A38";
+                        }
+                    }
+                }
+                //},{
+                //    name:"超支",
+                //    type: 'bar',
+                //    itemStyle: {
+                //        normal: {
+                //            color: function (item) {
+                //                 return "#C23531";
+                //            }
+                //        }
+                //    }
+            }]
+        });
+    });
+
+</script>
 <% include ../layout/footer.html %>

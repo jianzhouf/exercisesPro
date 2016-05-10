@@ -41,6 +41,20 @@ router.get('/profile', function(req, res) {
         user: user
     });
 });
+router.get('/profile/notice', function(req, res) {
+
+    res.render('web/notice', {
+        title: '通知',
+        user: user
+    });
+});
+router.get('/profile/message', function(req, res) {
+
+    res.render('web/message', {
+        title: '消息',
+        user: user
+    });
+});
 router.get('/database', function(req, res) {
     
     res.render('web/database', {

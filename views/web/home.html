@@ -15,7 +15,7 @@
             <img src="../images/home/index_bg.png" alt="...">
             <div style="position: absolute;top:150px;left: 400px;">
 
-                <table class="table table-bordered" style="width: 400px;height: 200px;">
+                <table class="table table-bordered" style="width: 400px;height: 200px;background-color: #fff;">
                     <thead>
                     <tr>
                         <th class="col-sm-1"></th>
@@ -26,34 +26,34 @@
                     </tr>
                     </thead>
                     <tbody id="table-content">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     </tbody>
                 </table>
 
@@ -72,14 +72,14 @@
             </div>
             <div style="position: absolute;top: 200px;left: 850px;font-size: 26px;">
                 <p style="color: #0b3e6f;">柱状图显示月收入支出情况</p>
-                <a href="/report" style="font-size: 26px;color: #ffffff;">&gt;&gt;报表</a>
+                <a href="/report" style="font-size: 20px;color: #ffffff;">&gt;&gt;报表</a>
             </div>
         </div>
         <div class="item">
             <img src="../images/home/index_bg.png" alt="...">
             <div style="position: absolute;top: 200px;left: 850px;font-size: 26px;">
                 <p style="color: #0b3e6f;">个人消息/通知管理</p>
-                <a href="/profile" style="font-size: 26px;color: #ffffff;">&gt;&gt;消息中心</a>
+                <a href="/profile" style="font-size: 20px;color: #ffffff;">&gt;&gt;消息中心</a>
             </div>
 
         </div>
@@ -90,5 +90,28 @@
     <h1>Welcome <%= user.username %> 欢迎来到首页！</h1>
 
 </div>
+<script>
+    var myChart = echarts.init(document.getElementById('report-intro'));
 
+
+    myChart.setOption({
+        title: {
+            text: '报表柱状图'
+        },
+        tooltip: {},
+        legend: {
+            data: ['**']
+        },
+        xAxis: {
+            data: []
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    });
+
+</script>
 <% include ../layout/footer.html %>
