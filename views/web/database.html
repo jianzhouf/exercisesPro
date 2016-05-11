@@ -41,6 +41,7 @@
 
     function tableResponse(params, url) {
         $.ajax({
+            type: "post",
             dataType: "json",
             url: url,
             data: params,
