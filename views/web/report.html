@@ -3,7 +3,7 @@
 
 <div class="container">
     <div id="main" style="width: 1100px;height:600px;"></div>
-    <div id="pieChart" style="width: 1100px;height:600px;" ></div>
+    <div id="pieChart" style="width: 600px;height:300px;" ></div>
 </div>
 <script>
     var myChart = echarts.init(document.getElementById('main'));
@@ -16,10 +16,11 @@
             },
             tooltip: {},
             legend: {
-                data: ['收入', '支出', '超支']
+                data: ['收入', '支出', '超支'],
+                selectedMode: false
             },
             toolbox: {
-                show: false,
+                show: true,
                 feature: {
                     dataView: {show: true, readOnly: false},
                     magicType: {show: true, type: ['line', 'bar']},
@@ -65,17 +66,20 @@
                             return "#FE9A38";
                         }
                     }
+                },
+                lineStyle: {
+                    normal: {
+                        color:  "#FE9A38"
+                    }
                 }
-                //},{
-                //    name:"超支",
-                //    type: 'bar',
-                //    itemStyle: {
-                //        normal: {
-                //            color: function (item) {
-                //                 return "#C23531";
-                //            }
-                //        }
-                //    }
+            },{
+                name: "超支",
+                type: "bar",
+                itemStyle: {
+                    normal: {
+                        color: "#C23531"
+                    }
+                }
             }]
         });
     });
