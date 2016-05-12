@@ -62,7 +62,7 @@
             }
             for (var i = (page - 1) * 10; i < len; i++) {
                 $("#table-content").append('<tr data-id="' + data[i].id + '"><td><a href="#" class="toggle-cont">' + data[i].title + '</a></td><td>'
-                    + data[i].ago + '</td><td><a href="#" class="notice-delete">删除</a></td></tr><tr class="hide"><td colspan="3">' + data[i].description + '</td></tr>');
+                    + data[i].ago + '</td><td><a href="#" class="notice-delete">删除</a></td></tr><tr style="background-color: #E5F5FD;" class="hide"><td colspan="3">' + data[i].description + '</td></tr>');
             }
 
             //分页组件

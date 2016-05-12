@@ -29,10 +29,14 @@
                                 <h4 class="modal-title" id="myModalLabel">修改头像</h4>
                             </div>
                             <div class="modal-body">
-                                <div style="width: 500px;height: 300px;margin-bottom: 10px;">
-                                    <img id="_img" src="../images/base/Penguins.jpg">
+                                <div id="target"
+                                     style="width: 300px;height: 300px;margin-bottom: 10px;margin-right: 50px;border: 1px solid #ddd;display: inline-block;">
+
                                 </div>
-                                
+                                <div id="preview"
+                                     style="position: relative;width: 82px;height: 82px;margin-bottom: 10px;display: inline-block;border: 1px solid #ddd;overflow: hidden;">
+
+                                </div>
                                 <input type="file" id="select-picture">
                                 <button class="btn btn-primary">保存修改</button>
                             </div>
@@ -89,20 +93,61 @@
     });
 
 
-//    上传头像
-    $("#select-picture").click(function(){
-    });
-    $('#_img').Jcrop({
+    //    上传头像
+
+    var img = new Image();
+    img.src = "../images/base/Penguins.jpg";
+    var w = img.width;
+    var h = img.height;
+    var pw = $("#target").width();
+    var ph = $("#target").height();
+
+    if (w / pw > h / ph) {
+        h = h / (w / pw);
+        w = pw;
+        $("#target").css("padding-top", (ph - h) / 2 + "px");
+    } else {
+        w = w / (h / ph);
+        h = ph;
+        $("#target").css("padding-left", (pw - w) / 2 + "px");
+    }
+    img.width = w;
+    img.height = h;
+    img.id = "picture";
+    $("#target").append(img);
+
+    var img2 = new Image();
+    img2.src = "../images/base/Penguins.jpg";
+    var w2 = img2.width;
+    var h2 = img2.height;
+    var pw2 = $("#target").width();
+    var ph2 = $("#target").height();
+
+    if (w2 / pw2 > h2 / ph2) {
+        h2 = h2 / (w2 / pw2);
+        w2 = pw2;
+    } else {
+        w = w / (h / ph);
+        h = ph;
+    }
+    img2.width = w;
+    img2.height = h;
+    img2.id = "_picture";
+    $("#preview").append(img2);
+
+    $('#picture').Jcrop({
+        allowSelect: false,
+        allowResize: false,
         aspectRatio: 1,
-        boxWidth: 500,
-        boxHeight: 300,
-
-        keySupport: false
-
-    },function(){
-
+        keySupport: false,
+        onChange: updatePreview,
+        onSelect: updatePreview
+    }, function () {
+        this.setSelect([0, 0, 80, 80]);
 
     });
-
+    function updatePreview(c){
+        $("#_picture").css({"position":"absolute","left": -c.x+"px","top": -c.y+"px"});
+    }
 </script>
 <% include ../layout/footer.html %>
